@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:random_song/domain/requests/api_config/genius_api_config.dart';
 
+class SongNotFoundException implements Exception {}
+
 class RandomSongRequest {
   static Future<Map<String, dynamic>> getSongById(int songId) async {
     var parameters = {
@@ -12,7 +14,7 @@ class RandomSongRequest {
     var url = Uri(
       scheme: GeniusApiConfig.scheme,
       host: GeniusApiConfig.host,
-      path: "${GeniusApiConfig.path}$songId",
+      path: "${GeniusApiConfig.path}/$songId",
       queryParameters: parameters
     );
 
@@ -21,6 +23,10 @@ class RandomSongRequest {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
+      if (response.reasonPhrase == "Not found") {
+        throw SongNotFoundException();
+      }
+
       throw Exception('Error: ${response.reasonPhrase}');
     }
   }
