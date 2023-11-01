@@ -23,7 +23,7 @@ class RandomSongRequest {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      if (response.reasonPhrase == "Not found") {
+      if (response.reasonPhrase == "Not Found") {
         throw SongNotFoundException();
       }
 
