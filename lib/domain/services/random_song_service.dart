@@ -1,6 +1,6 @@
 import 'package:random_song/domain/models/song.dart';
 import 'package:random_song/domain/models/song_response.dart';
-import 'package:random_song/domain/random_generator.dart';
+import 'package:random_song/domain/random/random_generator.dart';
 import 'package:random_song/domain/requests/random_song_request.dart';
 
 class RandomSongService {
