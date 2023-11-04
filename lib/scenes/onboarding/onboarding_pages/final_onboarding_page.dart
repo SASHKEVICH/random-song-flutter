@@ -12,7 +12,7 @@ class FinalOnboardingPage extends StatelessWidget {
         const Text(_Constants.readyToHearASongText),
         ElevatedButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, Routes.randomSongRoute);
+            Navigator.pushReplacementNamed(context, Routes.requestRandomSongRoute);
           },
           child: const Text(_Constants.buttonText)
         )
