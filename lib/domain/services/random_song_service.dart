@@ -7,7 +7,7 @@ class RandomSongService {
   final minSongId = 1;
   final maxSongId = 2471960;
 
-  Future<Song?> getRandomSong() async {
+  Future<Song> getRandomSong() async {
     try {
       var songId = RandomGenerator.getRandomInt(minSongId, maxSongId);
       var apiData = await RandomSongRequest.getSongById(songId);
@@ -18,7 +18,7 @@ class RandomSongService {
         throw Exception('Request error. ${response.meta}');
       }
 
-      return response.response?.song;
+      return response.response!.song!;
     } catch (e) {
       rethrow;
     }

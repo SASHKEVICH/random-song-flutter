@@ -1,6 +1,8 @@
 import 'package:random_song/domain/models/media.dart';
 
 class Song {
+  int? id;
+
   String? apiPath;
   String? appleMusicId;
   String? appleMusicPlayerUrl;
@@ -8,7 +10,6 @@ class Song {
   String? fullTitle;
   String? headerImageThumbnailUrl;
   String? headerImageUrl;
-  int? id;
   String? language;
   String? lyricsState;
   String? path;
@@ -19,6 +20,7 @@ class Song {
   String? title;
   String? titleWithFeatured;
   String? url;
+
   List<Media>? media;
 
   Song(
