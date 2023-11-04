@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:random_song/scenes/show_random_song/models/random_song_view_model.dart';
 
-class ShowRandomSongScreen extends StatelessWidget {
-  const ShowRandomSongScreen({super.key, required this.song});
+class ShowRandomSongScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _ShowRandomSongScreenState();
+}
 
-  final RandomSongViewModel song;
+class _ShowRandomSongScreenState extends State<ShowRandomSongScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final song = ModalRoute.of(context)?.settings.arguments as RandomSongViewModel;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,

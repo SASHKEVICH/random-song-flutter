@@ -6,6 +6,7 @@ import 'package:random_song/domain/di.dart';
 import 'package:random_song/scenes/onboarding/onboarding_screen.dart';
 import 'package:random_song/scenes/request_random_song/cubit/request_random_song_cubit.dart';
 import 'package:random_song/scenes/request_random_song/request_random_song_page.dart';
+import 'package:random_song/scenes/show_random_song/show_random_song_screen.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -21,8 +22,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        Routes.onboardingRoute: (context) => const OnboardingScreen(),
-        Routes.requestRandomSongRoute: (context) => _getRequestRandomSongPage(),
+        Routes.onboardingRoute: (_) => const OnboardingScreen(),
+        Routes.requestRandomSongRoute: (_) => _getRequestRandomSongPage(),
+        Routes.showRandomSongRoute: (_) => ShowRandomSongScreen(),
       },
       home: FutureBuilder (
         future: getInitialRoute(),
@@ -44,7 +46,7 @@ class MainApp extends StatelessWidget {
 
   Widget _getRequestRandomSongPage() {
     return BlocProvider<RequestRandomSongScreenCubit>(
-      create: (context) => RequestRandomSongScreenCubit(
+      create: (_) => RequestRandomSongScreenCubit(
         randomSongService: _di.randomSongService,
         randomSongViewModelFactory: _di.randomSongViewModelFactory
       ),
@@ -62,4 +64,5 @@ class MainApp extends StatelessWidget {
 class Routes {
   static const onboardingRoute = '/onboarding';
   static const requestRandomSongRoute = '/request-random-song';
+  static const showRandomSongRoute = '/show-random-song';
 }
