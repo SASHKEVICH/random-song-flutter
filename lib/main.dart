@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         Routes.onboardingRoute: (context) => const OnboardingScreen(),
-        Routes.randomSongRoute: (context) => _getRequestRandomSongPage(),
+        Routes.requestRandomSongRoute: (context) => _getRequestRandomSongPage(),
       },
       home: FutureBuilder (
         future: getInitialRoute(),
@@ -45,18 +45,21 @@ class MainApp extends StatelessWidget {
   Widget _getRequestRandomSongPage() {
     return BlocProvider<RequestRandomSongScreenCubit>(
       create: (context) => RequestRandomSongScreenCubit(
-        randomSongService: _di.randomSongService
+        randomSongService: _di.randomSongService,
+        randomSongViewModelFactory: _di.randomSongViewModelFactory
       ),
       child: const RequestRandomSongPage(),
     );
   }
 
   Future<String> getInitialRoute() async {
-    return await _di.firstLaunchService.isFirstLaunch ? Routes.onboardingRoute : Routes.randomSongRoute;
+    return await _di.firstLaunchService.isFirstLaunch
+      ? Routes.onboardingRoute
+      : Routes.requestRandomSongRoute;
   }
 }
 
 class Routes {
   static const onboardingRoute = '/onboarding';
-  static const randomSongRoute = '/random-song';
+  static const requestRandomSongRoute = '/request-random-song';
 }
