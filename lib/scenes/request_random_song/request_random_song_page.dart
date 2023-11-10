@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:random_song/main.dart';
 
 import 'package:random_song/scenes/request_random_song/cubit/request_random_song_cubit.dart';
 import 'package:random_song/scenes/request_random_song/cubit/request_random_song_state.dart';
 import 'package:random_song/scenes/request_random_song/request_random_song_screen.dart';
-import 'package:random_song/scenes/show_random_song/show_random_song_screen.dart';
 
 class RequestRandomSongPage extends StatefulWidget {
   const RequestRandomSongPage({super.key});
@@ -19,15 +19,16 @@ class _RequestRandomSongPageState extends State<RequestRandomSongPage> {
     return BlocListener<RequestRandomSongScreenCubit, RequestRandomSongState>(
       listener: (context, state) {
         if (state is ShowRandomSongScreenState) {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => ShowRandomSongScreen(song: state.song))
+          Navigator.of(context).pushNamed(
+            Routes.showRandomSongRoute,
+            arguments: state.song
           );
           BlocProvider.of<RequestRandomSongScreenCubit>(context).setInitState();
         }
       },
       child: Scaffold(
         body: BlocBuilder<RequestRandomSongScreenCubit, RequestRandomSongState>(
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is InitState) {
               return const RequestRandomSongScreen();
             } else if (state is LoadingState) {

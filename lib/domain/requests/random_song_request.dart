@@ -6,7 +6,7 @@ import 'package:random_song/domain/requests/api_config/genius_api_config.dart';
 class SongNotFoundException implements Exception {}
 
 class RandomSongRequest {
-  static Future<Map<String, dynamic>> getSongById(int songId) async {
+  static Future<Map<String, dynamic>?> getSongById(int songId) async {
     var parameters = {
       'access_token': GeniusApiConfig.accessToken,
     };
@@ -22,11 +22,9 @@ class RandomSongRequest {
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
+    } else if (response.statusCode == 404) {
+      return null;
     } else {
-      if (response.reasonPhrase == "Not Found") {
-        throw SongNotFoundException();
-      }
-
       throw Exception('Error: ${response.reasonPhrase}');
     }
   }

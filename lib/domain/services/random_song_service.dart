@@ -7,20 +7,18 @@ class RandomSongService {
   final minSongId = 1;
   final maxSongId = 2471960;
 
-  Future<Song> getRandomSong() async {
-    try {
-      var songId = RandomGenerator.getRandomInt(minSongId, maxSongId);
-      var apiData = await RandomSongRequest.getSongById(songId);
+  Future<Song?> getRandomSong() async {
+    final songId = RandomGenerator.getRandomInt(minSongId, maxSongId);
+    final apiData = await RandomSongRequest.getSongById(songId);
 
-      SongResponse response = SongResponse.fromJson(apiData);
+    if (apiData == null) return null;
 
-      if (response.meta?.status != 200) {
-        throw Exception('Request error. ${response.meta}');
-      }
+    SongResponse response = SongResponse.fromJson(apiData);
 
-      return response.response!.song!;
-    } catch (e) {
-      rethrow;
+    if (response.meta?.status != 200) {
+      throw Exception('Request error. ${response.meta}');
     }
+
+    return response.response!.song!;
   }
 }

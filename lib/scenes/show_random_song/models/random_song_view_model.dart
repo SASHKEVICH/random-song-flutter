@@ -6,6 +6,7 @@ class RandomSongViewModel {
   final String artists;
   final String songArtImageUrl;
   final String releaseDate;
+  final String url;
 
   final String? appleMusicUrl;
   final String? spotifyMusicUrl;
@@ -16,6 +17,7 @@ class RandomSongViewModel {
     required this.artists,
     required this.songArtImageUrl,
     required this.releaseDate,
+    required this.url,
     this.appleMusicUrl,
     this.spotifyMusicUrl,
     this.youtubeMusicUrl
