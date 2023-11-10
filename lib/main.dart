@@ -7,6 +7,8 @@ import 'package:random_song/scenes/onboarding/onboarding_screen.dart';
 import 'package:random_song/scenes/request_random_song/cubit/request_random_song_cubit.dart';
 import 'package:random_song/scenes/request_random_song/request_random_song_page.dart';
 import 'package:random_song/scenes/show_random_song/show_random_song_screen.dart';
+import 'package:random_song/scenes/show_song_lyrics/cubit/show_song_lyrics_cubit.dart';
+import 'package:random_song/scenes/show_song_lyrics/show_song_lyrics_page.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -24,7 +26,8 @@ class MainApp extends StatelessWidget {
       routes: {
         Routes.onboardingRoute: (_) => const OnboardingScreen(),
         Routes.requestRandomSongRoute: (_) => _getRequestRandomSongPage(),
-        Routes.showRandomSongRoute: (_) => ShowRandomSongScreen(),
+        Routes.showRandomSongRoute: (_) => const ShowRandomSongScreen(),
+        Routes.showSongLyricsRoute: (_) => _getShowSongLyricsPage(),
       },
       home: FutureBuilder (
         future: getInitialRoute(),
@@ -54,6 +57,15 @@ class MainApp extends StatelessWidget {
     );
   }
 
+  Widget _getShowSongLyricsPage() {
+    return BlocProvider<ShowSongLyricsCubit>(
+      create: (_) => ShowSongLyricsCubit(
+        songLyricsService: _di.songLyricsService
+      ),
+      child: const ShowSongLyricsPage(),
+    );
+  }
+
   Future<String> getInitialRoute() async {
     return await _di.firstLaunchService.isFirstLaunch
       ? Routes.onboardingRoute
@@ -65,4 +77,5 @@ class Routes {
   static const onboardingRoute = '/onboarding';
   static const requestRandomSongRoute = '/request-random-song';
   static const showRandomSongRoute = '/show-random-song';
+  static const showSongLyricsRoute = '/show-song-lyrics';
 }

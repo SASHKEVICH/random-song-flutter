@@ -7,7 +7,8 @@ class RandomSongViewModelFactory {
       songTitle: song.title ?? "Неизвестно",
       artists: song.artistNames ?? "Неизвестно",
       songArtImageUrl: song.songArtImageUrl ?? "",
-      releaseDate: song.releaseDate ?? "Нет информации"
+      releaseDate: song.releaseDate ?? "Нет информации",
+      url: song.url ?? ""
     );
   }
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:random_song/main.dart';
 import 'package:random_song/scenes/show_random_song/models/random_song_view_model.dart';
 
 class ShowRandomSongScreen extends StatefulWidget {
+  const ShowRandomSongScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => _ShowRandomSongScreenState();
 }
 
 class _ShowRandomSongScreenState extends State<ShowRandomSongScreen> {
-
   @override
   Widget build(BuildContext context) {
     final song = ModalRoute.of(context)?.settings.arguments as RandomSongViewModel;
@@ -25,7 +27,12 @@ class _ShowRandomSongScreenState extends State<ShowRandomSongScreen> {
           Text("Исполнитель: ${song.artists}"),
           Text("Дата выхода: ${song.releaseDate}"),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                Routes.showSongLyricsRoute,
+                arguments: song
+              );
+            },
             child: const Text("Текст песни")
           ),
           ElevatedButton(

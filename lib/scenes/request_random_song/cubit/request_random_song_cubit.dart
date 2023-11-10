@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:random_song/domain/factories/random_song_view_model_factory.dart';
 import 'package:random_song/domain/models/song.dart';
-import 'package:random_song/domain/requests/random_song_request.dart';
 import 'package:random_song/domain/services/random_song_service.dart';
 import 'package:random_song/scenes/request_random_song/cubit/request_random_song_state.dart';
 
@@ -20,13 +19,11 @@ class RequestRandomSongScreenCubit extends Cubit<RequestRandomSongState> {
     emit(LoadingState());
 
     while (state is LoadingState) {
-      try {
-        final song = await randomSongService.getRandomSong();
-        showRandomSong(song);
-        break;
-      } on SongNotFoundException {
-        continue;
-      }
+      final song = await randomSongService.getRandomSong();
+      if (song == null) continue;
+
+      showRandomSong(song);
+      break;
     }
   }
 
