@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:random_song/main.dart';
 import 'package:random_song/scenes/show_random_song/models/random_song_view_model.dart';
 
@@ -36,19 +38,50 @@ class _ShowRandomSongScreenState extends State<ShowRandomSongScreen> {
             child: const Text("Текст песни")
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => _launchUrl(song.youtubeUrl),
             child: const Text("YouTube"),
           ),
           ElevatedButton(
-            onPressed: () {},
-            child: const Text("Apple Music"),
+            onPressed: () => _launchUrl(song.soundcloudUrl),
+            child: const Text("Soundcloud"),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => _launchUrl(song.spotifyUrl),
             child: const Text("Spotify"),
           )
         ],
       )
     );
+  }
+
+  Future<void> _launchUrl(String? urlString) async {
+    if (urlString == null) {
+      Widget okButton = TextButton(
+        child: const Text("OK"),
+        onPressed: () => Navigator.pop(context),
+      );
+
+      AlertDialog alert = AlertDialog(
+        title: const Text("Нет ссылки на ресурс"),
+        content: const Text("К сожалению, открыть песню по этой ссылке не получится :("),
+        actions: [
+          okButton,
+        ],
+      );
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+      return; 
+    }
+
+    final url = Uri.parse(urlString);
+
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

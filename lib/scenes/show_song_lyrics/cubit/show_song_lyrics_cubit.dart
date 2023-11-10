@@ -13,7 +13,7 @@ class ShowSongLyricsCubit extends Cubit<ShowSongLyricsState> {
   final SongLyricsService songLyricsService;
 
   void loadLyrics(RandomSongViewModel song) async {
-    final lyrics = await songLyricsService.loadSongLyrics(song.url);
+    final lyrics = await songLyricsService.loadSongLyrics(song.geniusUrl);
     emit(LoadedState(song: song, lyrics: lyrics));
   }
 }
