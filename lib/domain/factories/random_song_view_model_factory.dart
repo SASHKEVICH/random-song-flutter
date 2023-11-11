@@ -1,3 +1,4 @@
+import 'package:random_song/domain/factories/media_factory.dart';
 import 'package:random_song/domain/models/song.dart';
 import 'package:random_song/scenes/show_random_song/models/random_song_view_model.dart';
 
@@ -8,7 +9,10 @@ class RandomSongViewModelFactory {
       artists: song.artistNames ?? "Неизвестно",
       songArtImageUrl: song.songArtImageUrl ?? "",
       releaseDate: song.releaseDate ?? "Нет информации",
-      url: song.url ?? ""
+      geniusUrl: song.url ?? "",
+      soundcloudUrl: MediaFactory.getMediaUrl(song.media!, MediaEnum.soundcloud),
+      youtubeUrl: MediaFactory.getMediaUrl(song.media!, MediaEnum.youtube),
+      spotifyUrl: MediaFactory.getMediaUrl(song.media!, MediaEnum.spotify),
     );
   }
 }
