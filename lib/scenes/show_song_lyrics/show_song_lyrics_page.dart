@@ -21,7 +21,17 @@ class ShowSongLyricsPage extends StatelessWidget {
             child: const Center(child: CircularProgressIndicator()),
           );
         } else if (state is LoadedState) {
-          return ShowSongLyricsScreen(song: state.song, lyrics: state.lyrics ?? "Ничего не найдено");
+          if (state.lyrics == null) {
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.red,
+                title: Text(state.song.songTitle),
+              ),
+              body: const Center(child: Text("Ничего не найдено")),
+            );
+          }
+
+          return ShowSongLyricsScreen(songTitle: state.song.songTitle, lyrics: state.lyrics!);
         } else if (state is ErrorState) {
           print(state.errorMessage);
           return Container();
