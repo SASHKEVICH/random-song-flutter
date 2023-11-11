@@ -20,9 +20,15 @@ class _RequestRandomSongScreenState extends State<RequestRandomSongScreen> {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.red,
-            fixedSize: const Size(250, 40)
+            fixedSize: const Size(150, 150),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(75),
+            ),
           ),
-          child: const Text(_Constants.randomSongButtonTitle)
+          child: const Text(
+            _Constants.randomSongButtonTitle,
+            textAlign: TextAlign.center,
+          )
         ),
       ),
     );
