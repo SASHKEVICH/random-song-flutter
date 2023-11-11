@@ -18,9 +18,17 @@ class _RequestRandomSongScreenState extends State<RequestRandomSongScreen> {
           onPressed: () {
             BlocProvider.of<RequestRandomSongScreenCubit>(context).loadRandomSong();
           },
-          child: const Text("Тык")
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red,
+            fixedSize: const Size(250, 40)
+          ),
+          child: const Text(_Constants.randomSongButtonTitle)
         ),
       ),
     );
   }
+}
+
+class _Constants {
+  static const String randomSongButtonTitle = "ууууу, СЛУЧАЙНАЯ ПЕСНЯ";
 }
