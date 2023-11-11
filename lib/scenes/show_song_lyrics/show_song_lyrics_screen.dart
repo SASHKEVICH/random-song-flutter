@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:random_song/scenes/show_random_song/models/random_song_view_model.dart';
 
 class ShowSongLyricsScreen extends StatelessWidget {
   const ShowSongLyricsScreen({
