@@ -9,12 +9,19 @@ class FinalOnboardingPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(_Constants.readyToHearASongText),
+        const Text(
+          _Constants.readyToHearASongText,
+          style: TextStyle(fontSize: 20),
+        ),
+        const SizedBox(height: 15,),
         ElevatedButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, Routes.requestRandomSongRoute);
           },
-          child: const Text(_Constants.buttonText)
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red,
+          ),
+          child: const Text(_Constants.buttonTitle)
         )
       ],
     );
@@ -22,6 +29,6 @@ class FinalOnboardingPage extends StatelessWidget {
 }
 
 class _Constants {
-  static const readyToHearASongText = "Готовы послушать новую песню?";
-  static const buttonText = "Да!";
+  static const readyToHearASongText = "Готовы найти новую песню?";
+  static const buttonTitle = "Давайте уже!";
 }
