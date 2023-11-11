@@ -8,7 +8,10 @@ class StartOnboardingPage extends StatelessWidget {
     return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(_Constants.greetText),
+        Text(
+          _Constants.greetText,
+          style: TextStyle(fontSize: 30),
+        ),
       ],
     );
   }

@@ -8,7 +8,7 @@ class RandomSongViewModelFactory {
       songTitle: song.title ?? "Неизвестно",
       artists: song.artistNames ?? "Неизвестно",
       songArtImageUrl: song.songArtImageUrl ?? "",
-      releaseDate: song.releaseDate ?? "Нет информации",
+      releaseDate: song.releaseDate,
       geniusUrl: song.url ?? "",
       soundcloudUrl: MediaFactory.getMediaUrl(song.media!, MediaEnum.soundcloud),
       youtubeUrl: MediaFactory.getMediaUrl(song.media!, MediaEnum.youtube),

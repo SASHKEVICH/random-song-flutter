@@ -5,7 +5,7 @@ class RandomSongViewModel {
   final String songTitle;
   final String artists;
   final String songArtImageUrl;
-  final String releaseDate;
+  final String? releaseDate;
   final String geniusUrl;
 
   final String? soundcloudUrl;
